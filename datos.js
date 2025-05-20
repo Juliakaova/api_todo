@@ -63,17 +63,18 @@ export function actualizarTexto(id,tarea){
         })
         .catch( error =>  ko({ error : "error en la base de datos"}))
     });
-}
 
-export function actualizarTexto(id){
-    return new Promise((ok,ko)=> {
+ }
+
+ export function borrarTarea(id){
+    return new Promise((ok,ko) => {
         const conexion = conectar();
 
-        conexion `DELETE FROM tareas WHERE id = ${id}`
-        .then( ({count})=> {   
-            conexion.end();   
+        conexion`DELETE FROM tareas WHERE id = ${id}`
+        .then( ({count}) => {
+            conexion.end();
             ok(count)
         })
-        .catch( error =>  ko({ error : "error en la base de datos"}))
+        .catch( error => ko({ error : "error en la base de datos"}))
     });
- }
+}
