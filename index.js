@@ -50,8 +50,12 @@ servidor.post("/tareas/nueva", async(peticion, respuesta,siguiente) => {
     }
 });
 
-servidor.put("/tareas/actualizar/estado/:id", async(peticion, respuesta,siguiente) => {
+servidor.put("/tareas/actualizar/estado/:id", async(peticion, respuesta,siguiente) => {//exp reg>> solo puede ser 1 o más números
     let {id} = peticion.params;
+
+    if(!/^[0-9]+$/.test(id)){
+        return siguiente();
+    }
   
     if(tarea == undefined || tarea.toString().trim() == ""){
         return siguente(true);
@@ -85,6 +89,10 @@ servidor.put("/tareas/actualizar/texto/:id", async(peticion, respuesta,siguiente
     }
     
     let {id} = peticion.params;
+
+    if(!/^[0-9]+$/.test(id)){
+        return siguiente();
+    }
   
     if(tarea == undefined || tarea.toString().trim() == ""){
         return siguente(true);
@@ -111,6 +119,10 @@ servidor.put("/tareas/actualizar/texto/:id", async(peticion, respuesta,siguiente
 
 servidor.delete("/tareas/borrar/:id", async(peticion, respuesta,siguiente) => {
     let {id} = peticion.params;
+
+    if(!/^[0-9]+$/.test(id)){
+        return siguiente();
+    }
   
 
     try{
@@ -118,7 +130,7 @@ servidor.delete("/tareas/borrar/:id", async(peticion, respuesta,siguiente) => {
         let cantidad = await borrarTarea(id);
 
         if(!cantidad){
-            return siguiente();
+            return siguiente ();
         }
 
         respuesta.status(204);
