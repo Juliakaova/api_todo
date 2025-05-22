@@ -4,7 +4,7 @@ dotenv.config();
 import postgres from "postgres";
 
 
-function conectar(){
+function conectar(){ // deja preparada la conexión a la base de datos
     return postgres({
         host : process.env.DB_HOST,
         database : process.env.DB_NAME,
@@ -13,7 +13,7 @@ function conectar(){
     });
 }
 
-export function leerTareas(){
+export function leerTareas(){// lee las tareas de la base de datos
     return new Promise((ok,ko)=> {
         const conexion = conectar();
 
@@ -46,7 +46,7 @@ export function actualizarEstado(id){
         conexion `UPDATE tareas SET terminada = NOT terminada WHERE id = ${id}`
         .then( ({count})=> {        // revisar desestructuración
             conexion.end();   
-            ok(count)
+            ok(count)//devuelve 1 o 0
         })
         .catch( error =>  ko({ error : "error en la base de datos"}))
     });

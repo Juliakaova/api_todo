@@ -11,7 +11,7 @@ const servidor = express();
 
 servidor.use(cors());
 
-servidor.use(express.json());
+servidor.use(express.json()); //pregunta por el content type application json y crea objeto en peticion.body
 
 if(process.env.PRUEBAS){
     servidor.use("/pruebas", express.static("./pruebas"));
