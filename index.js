@@ -57,10 +57,6 @@ servidor.put("/tareas/actualizar/estado/:id", async(peticion, respuesta,siguient
         return siguiente();
     }
   
-    if(tarea == undefined || tarea.toString().trim() == ""){
-        return siguente(true);
-
-    }
     try{
 
         let cantidad = await actualizarEstado(id);
